@@ -1,0 +1,26 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "an Amazon-like web application to simulate the checkout process",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "pg": "^7.6.0",
+    "sequelize": "^4.41.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/downtownadambrown/Bamazon.git"
+  },
+  "author": "Adam Brown",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/downtownadambrown/Bamazon/issues"
+  },
+  "homepage": "https://github.com/downtownadambrown/Bamazon#readme"
+}
