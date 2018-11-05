@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 require('./routes/api-routes.js')(app);
 require('./routes/html-routes.js')(app);
 
-const db = require('../models');
+const db = require('./models');
 
 // Syncs our database first
 db.sequelize.sync().then(function(){

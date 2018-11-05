@@ -20,7 +20,7 @@ module.exports = function(app) {
         .then(function(rows){
             res.json({ success: true });
         }).catch(function(err){
-            res.json({ error: err});
+            res.json({ error: err });
         });
     });
 };
