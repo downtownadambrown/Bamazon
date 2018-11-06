@@ -14,8 +14,11 @@
 <body>
     <div class="container-fluid m-0" id="main-container">
         <header class="row">
-            <div class="col-12 bg-dark text-light">
+            <div class="col-9 bg-dark text-light">
                 <h3>Administration Dashboard</h3>
+            </div>
+            <div class="col-3 bg-dark text-light text-center pt-2">
+                <h6 id="status-bar" class="m-0 align-middle"></h6>
             </div>
         </header>
         <div class="row d-flex flex-fill" id="adminLinks">
@@ -33,13 +36,7 @@
                 <div class="table-container">
                     <table class="table">
                         <thead id="admin-table-header">
-                            <tr>
-                                <th scope="col">PID#</th>
-                                <th scope="col">Product Name</th>
-                                <th scope="col">Dept Name</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Price</th>
-                            </tr>
+                        <!-- Table Header gets set here -->
                         </thead>
                         <tbody id="admin-table-body">
                         <!-- Products get inserted here -->

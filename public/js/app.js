@@ -1,9 +1,17 @@
 
-const clearProductTable = function(){
+const clearTable = function(){
     $('.admin-table-row').remove();
 };
 
-const emptyProductModal = function(){
+const clearTableHeader = function(){
+    $('#admin-table-header-row').remove();
+};
+
+const clearStatusBar = function(){
+    $('#status-bar').text('');
+}
+
+const clearProductModal = function(){
     $('#prod-product-name').val('');
     $('#prod-department-name').val('');
     $('#prod-price').val('');
@@ -23,7 +31,17 @@ const renderProduct = function() {
         //   - price: Real
         //   - stock_quantity:  Integer
 
-        clearProductTable();
+        clearTable();
+        clearTableHeader();
+
+        let newHeader = $(`<tr id="admin-table-header-row">
+                                <th scope="col">PID#</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Dept Name</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                           </tr>`);
+        $('#admin-table-header').append(newHeader);
 
         rows.forEach(function(row){
             let newRow = $(`<tr class="admin-table-row">
@@ -52,8 +70,14 @@ const addProduct = function() {
         data: postData
     }).then(function(res){
         $('#modalAddProductForm').modal('hide');
-        emptyProductModal();
-        console.log('success! added to DB');
+        clearProductModal();
+        $('#status-bar').text('Success!  Product added')
+                        .fadeOut({
+                            duration : 2500,
+                            complete : function(){ clearStatusBar(); }
+                        });
+
+        console.log('success! added to DB', res);
     }).catch(function(err){
         console.log(err);
     });
@@ -75,5 +99,7 @@ $(document).ready(() => {
 
     //Event listener for the submit button on the Add Product Modal
     $("#add-product-button").on("click", addProduct);
+
+    
     $('#submit-inventory-order-button').on('click', addInventory);
 });
