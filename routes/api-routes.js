@@ -16,9 +16,13 @@ module.exports = function(app) {
     });
 
     app.post('/api/product', function(req, res){
+
+        console.log('request: ', req.body);
+
         db.Product.create(req.body)
         .then(function(rows){
-            res.json({ success: true });
+            res.json({ success: true,
+                       rowsAdded: rows });
         }).catch(function(err){
             res.json({ error: err });
         });
