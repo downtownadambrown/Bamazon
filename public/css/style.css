@@ -3,10 +3,22 @@ html, body {
     width: 100%;
 }
 
-#adminLinks{
+#adminLinks {
     height: 100%;
 }
 
-#main-container{
+#main-container {
     height: 100%;
+}
+
+#submitButton {
+    display: none;
+}
+
+.addQty {
+    width: 30px;
+}
+
+#miniwrapper {
+    width: 100px;
 }
