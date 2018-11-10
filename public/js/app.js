@@ -6,6 +6,10 @@ const clearTableHeader = function () {
     $('#admin-table-header-row').remove();
 };
 
+const clearTotalRow = function () {
+    $('#total-row').remove();
+}
+
 const clearStatusBar = function () {
     $('#status-bar').text('');
 };
@@ -20,6 +24,7 @@ const clearProductModal = function () {
 const clearComponents = function () {
     clearTable();
     clearTableHeader();
+    clearTotalRow();
     
     //hide submit button
     $('#submitButton').fadeOut();
@@ -70,7 +75,7 @@ const renderProduct = function () {
                                     <th scope="col">Subtotal</th>
                                 </tr>`);
             $('#admin-table-header').append(newHeader);
-            console.log(rows);
+
             for (let i = 0; i < rows.length; i++){
                 let newRow = $(`<tr class="admin-table-row">
                                     <td id="${rows[i].id}" class="rowID">${rows[i].product_name}</td>
@@ -112,7 +117,14 @@ const renderProduct = function () {
                     let newSubtotal = parseFloat(currentSubtotal) - newprice;
                     newSubtotal = newSubtotal.toFixed(2);
 
+                    // Set the new subtotal for this product in the page
                     $(`#subtotal${i}`).text(`$${newSubtotal}`);
+
+                    // Change total row at bottom as well
+                    const currentTotal = $(`#order-total`).text().slice(1);
+                    let newTotal = parseFloat(currentTotal) - newprice;
+                    newTotal = newTotal.toFixed(2);
+                    $(`#order-total`).text(`$${newTotal}`);                    
                 });
                 $(`#plus${i}`).on('click', function(){
                     // Grabbing the Quantity for modification
@@ -127,11 +139,57 @@ const renderProduct = function () {
                     let newSubtotal = parseFloat(currentSubtotal) + newprice;
                     newSubtotal = newSubtotal.toFixed(2);
 
+                    // Set the new subtotal for this product in the page
                     $(`#subtotal${i}`).text(`$${newSubtotal}`);
+                    
+                    // Change total row at bottom as well
+                    const currentTotal = $(`#order-total`).text().slice(1);
+                    let newTotal = parseFloat(currentTotal) + newprice;
+                    newTotal = newTotal.toFixed(2);
+                    $(`#order-total`).text(`$${newTotal}`);
                 });
             }
             
+            let newRow = $(`<tr id="total-row">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><p class="text-right font-weight-bold">Total:</p></td>
+                                <td id="order-total">$0.00</td>
+                            </tr>`);
+            $('#admin-table-body').append(newRow);
+
+            // Show the Submit Order button
             $('#submitButton').fadeIn().on('click', submitOrder);
+        } else if ($(thisRef).attr('id') === 'view-low-button') {
+            
+            // This is the constant you can modify to define what
+            // gets marked as 'low inventory'
+            // Default is 5 meaning anything with stock 5 or less
+            // will be rendered to the screen
+            const lowStockQuantity = 5;
+
+            let newHeader = $(`<tr id="admin-table-header-row">
+                                    <th scope="col">PID#</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Dept Name</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Unit Price</th>
+                                </tr>`);
+            $('#admin-table-header').append(newHeader);
+       
+            rows.forEach(function (row) {
+                if (row.stock_quantity <= lowStockQuantity) {
+                    let newRow = $(`<tr class="admin-table-row">
+                                        <th scope="row">${row.id}</th>
+                                        <td>${row.product_name}</td>
+                                        <td>${row.department_name}</td>
+                                        <td class="text-danger">${row.stock_quantity}</td>
+                                        <td>$${row.price}</td>
+                                    </tr>`);
+                    $('#admin-table-body').append(newRow);
+                }
+            });            
         } else {
             throw new Error();
         }
@@ -164,6 +222,8 @@ const submitOrder = function(){
 };
 
 const addProduct = function () {
+    
+    // Model the postData using values from modal
     const postData = {
         "product_name": $('#prod-product-name').val(),
         "department_name": $('#prod-department-name').val(),
@@ -216,9 +276,15 @@ $(document).ready(() => {
     //Event listener for View Products Button
     $("#view-product-button").on("click", renderProduct);
 
+    $('#view-low-button').on('click', renderProduct);
+
     //Event listener for Add Product Button
     $("#add-new-product-button").on("click", function (e) {
         e.preventDefault();
+        
+        // Clear components + Submit button if present
+        clearComponents();
+
         $('#modalAddProductForm').modal('show');
     });
 
