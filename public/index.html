@@ -1,13 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Main</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Bamazon</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    
+    <div class="container-fluid m-0" id="main-container">
+        <header class="row">
+            <div class="col-9 bg-dark text-light">
+                <h3>Bamazon · teh best dealz</h3>
+            </div>
+            <div class="col-3 bg-dark text-light text-center pt-2">
+                <h6 id="status-bar" class="m-0 align-middle"></h6>
+            </div>
+        </header>
+        <div class="row d-flex flex-fill" id="adminLinks">
+            <div class="col-3 bg-secondary text-light justify-content-center align-items-center">
+                <div class="list-group justify-items-center pt-3">
+                    <button type="button" class="list-group-item list-group-item-action" id="view-product-button">View
+                        Products</button>
+                    <button type="button" class="btn btn-dark" id="submitButton">Submit Order</button>
+                </div>
+            </div>
+            <div class="col-9 bg-light text-dark">
+                <div class="table-container">
+                    <table class="table">
+                        <thead id="admin-table-header">
+                        <!-- Table Header gets inserted here -->
+                        </thead>
+                        <tbody id="admin-table-body">
+                        <!-- Products get inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS imports -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="js/store.js"></script>
 </body>
+
 </html>

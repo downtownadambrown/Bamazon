@@ -7,6 +7,12 @@ module.exports = function(app){
         res.sendFile(path.join(__dirname, '../public/js/app.js'));
       });
 
+      app.get('/js/store.js', function(req, res) {
+        res.set('Content-Type', 'application/javascript; charset=utf-8'); 
+        res.sendFile(path.join(__dirname, '../public/js/store.js'));
+      });
+
+
       app.get('/css/style.css', function(req, res) {
         res.set('Content-Type', 'text/css; charset=utf-8'); 
         res.sendFile(path.join(__dirname, '../public/css/style.css'));
