@@ -16,12 +16,13 @@ const clearComponents = function () {
 
 const renderProduct = function () {
 
-    clearComponents();
-
     $.ajax({
         url: '/api/product',
         type: 'GET'
     }).then(function (rows) {
+        
+        // Reset the components before painting the div
+        clearComponents();
 
         // **Receiving an array of objects **
         //   Schema of object:
@@ -130,6 +131,7 @@ const renderProduct = function () {
 const submitOrder = function () {
     let putData = { data: [] };
     let activeRows = document.querySelectorAll('.rowID');
+    
 
     for (let i = 0; i < activeRows.length; i++) {
         const idKey = activeRows[i].id;
@@ -148,7 +150,7 @@ const submitOrder = function () {
         url: '/api/product',
         type: 'PUT',
         data: putData
-    }).then(function () {
+    }).then(function (rows) {
         renderProduct();
     });
 }

@@ -8,7 +8,11 @@ const db = require('../models');
 
 module.exports = function(app) {
     app.get('/api/product', function(req, res){
-        db.Product.findAll({}).then(function(rows){
+        db.Product.findAll({
+            order: [
+                ['id', 'ASC']
+            ]
+        }).then(function(rows){        
             res.json(rows);
         }).catch(function(err){
             res.json({ error: err });
@@ -38,9 +42,13 @@ module.exports = function(app) {
             db.Product.update({ stock_quantity : sq
             },{ where : { id : theID }
             }).catch(function(err){
-                throw new Error();
+                throw new Error(err);
             });
         }
-        res.json('done');
+        db.Product.findAll({}).then(function(rows){
+            res.json(rows);
+        }).catch(function(err){
+            res.json(err);
+        });
     });
 };

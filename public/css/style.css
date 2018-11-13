@@ -22,3 +22,21 @@ html, body {
 #miniwrapper {
     width: 100px;
 }
+
+#active-link {
+    text-decoration: none;
+    color: rgba(180, 180, 180, 0.5);
+}
+
+#active-link:hover {
+    color: white;
+}
+
+#inactive-link {
+    text-decoration: none;
+    color: white;
+}
+
+#inactive-link:hover {
+    color: rgba(180, 180, 180, 0.5);
+}
