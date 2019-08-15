@@ -1,7 +1,7 @@
 {
     "development": {
       "username": "postgres",
-      "password": "calling82",
+      "password": "",
       "database": "bamazon",
       "host": "127.0.0.1",
       "port": 5432,
